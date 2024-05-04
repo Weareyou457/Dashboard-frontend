@@ -11,6 +11,8 @@
       import Vendor from './Component/Dashboard/Vendor'
       import TechPack from './Component/Dashboard/TechPack'
 import Sidebar from './Component/Dashboard/Sidebar'
+import VendorData from './Component/Dashboard/VendorData'
+import TechPackData from './Component/Dashboard/TechPackData'
 
 
       const router = createBrowserRouter([
@@ -34,6 +36,14 @@ import Sidebar from './Component/Dashboard/Sidebar'
                         {
                           path: "TechPack",
                           element: <TechPack />
+                        },
+                        {
+                          path:"datavendor",
+                          element:<VendorData/>
+                        },
+                        {
+                          path:"dataTechPack",
+                          element:<TechPackData/>
                         }
                       ]
                     }

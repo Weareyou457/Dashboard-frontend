@@ -6,6 +6,8 @@ import MainDashboard from './Component/Dashboard/MainDashboard';
 import { createBrowserRouter } from "react-router-dom";
 import Vendor from './Component/Dashboard/Vendor';
 import TechPack from './Component/Dashboard/TechPack';
+import VendorData from './Component/Dashboard/VendorData';
+import TechPackData from './Component/Dashboard/TechPackData';
 
 
 const App =  createBrowserRouter([
@@ -28,6 +30,14 @@ const App =  createBrowserRouter([
       {
         path:'/TechPack',
         element:<TechPack/>
+      },
+      {
+        path:'/datavendor',
+        element:<VendorData/>
+      },
+      {
+        path:'/datatechpack',
+        element:<TechPackData/>
       },
       
     ]
