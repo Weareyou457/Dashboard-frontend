@@ -81,3 +81,12 @@
       -6px -2.7em 0 -6px var(--color-main);
   }
   
+
+  .form-control {
+    width: 60%;
+  
+    border: none;
+    padding: 10px;
+  
+    margin-bottom: 20px;
+  }

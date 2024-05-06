@@ -10,6 +10,7 @@ const Login = () => {
     const [value, setValue] = useState("");
     const[isPassword,setPassword]=useState("")
     const[Message,setMessage]=useState("")
+    const[islogin,setislogin]=useState("")
     
     const handleSubmit = (value,isPassword) => {
         const myHeaders = new Headers();
@@ -31,14 +32,14 @@ const Login = () => {
           .then((response) => response.text())
           .then((json) => {
             console.log(json)
-            console.log(json.status)
-                if(json){
-                    setMessage(json.message)
-                    navigate("/main")
-                }
-                else{
-                    setMessage(json.message)
-                }
+                // typeof(json) 
+               if(json == "true"){
+                navigate("/Main")
+                // console.log("hello")
+               }
+               else{
+    setislogin("User Not FOnd");
+               }
               }
         )
           .catch((error) => console.error(error));
@@ -69,7 +70,10 @@ const Login = () => {
         <div className="sumbitcontainer">
             <div className="sumbit" onClick={()=>{handleSubmit(value,isPassword)}}>Login</div>
         </div>
-        <div className='hello' style={{paddingLeft:100}}>If you Dont have Alredy account ? <span onClick={()=>{
+        {
+            islogin != '' && <div style={{display:"flex",justifyContent:"center",alignItems:"center",fontSize:"20px"}}>{islogin}</div>
+        }
+        <div className='aabc' style={{paddingLeft:100}}>If you Dont have Alredy account ? <span onClick={()=>{
             navigate("/SignUp");
         }}>Sign Up</span></div>
     </div>

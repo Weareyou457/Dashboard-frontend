@@ -8,6 +8,12 @@
 }
 
 
+.hdbeb{
+    background: linear-gradient(#240087, #42006c);
+};
+
+
+
 .field{
     display: flex;
     justify-content: center;

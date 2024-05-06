@@ -70,7 +70,7 @@ const SignUp = () => {
             <div className="sumbitcontainer">
                 <div className="sumbit" onClick={() => { handleSubmit(value, isPassword, Name,Phone) }}>Sign Up</div>
             </div>
-            <div className='hello'>If you have Alredy account ? <span onClick={() => {
+            <div className='aabc'>If you have Alredy account ? <span onClick={() => {
                 navigate("/");
             }}>Login</span></div>
         </div>

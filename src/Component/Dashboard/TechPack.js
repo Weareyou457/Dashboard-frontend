@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import "./TechPack.css"
+import "./TechPackData.css"
 const TechPack = () => {
 
   const [style, setStyle] = useState("")
@@ -8,33 +9,67 @@ const TechPack = () => {
   const [pdf, setPdf] = useState("")
 
 
-  const handleClick = (style, category, collection, pdf) => {
+  const handleClick = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
 
-    console.log(style);
-    console.log(category);
-    console.log(collection);
-    console.log(pdf);
+    const formData = new FormData();
+    formData.append("style", style);
+    formData.append("category", category);
+    formData.append("collectionss", collection);
+    formData.append("pdf", pdf);
 
-    const formdata = new FormData();
-    formdata.append("style", style);
-    formdata.append("category", category);
-    formdata.append("collectionss", collection);
-    formdata.append("pdf", pdf);
+    try {
+      const response = await fetch("http://localhost:8080/TechPack/add", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow"
-    };
 
-    fetch("http://localhost:8080/TechPack/add", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
-  }
+  const [data, setData] = useState([])
+    const [records, setrecords] = useState([])
+    useEffect(() => {
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
 
+        fetch("http://localhost:8080/TechPack/get", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                // console.log(result.data)
+                setData(result.data)
+                setrecords(result.data)
+            })
+            .catch((error) => console.error(error))
+    }, [])
+
+    const Filter = (event)=>{
+        setrecords(data.filter(f=>
+           
+            f.category.toLowerCase().includes(event.target.value)
+        ))
+    }
+
+    const openInNewTab = (url) => {
+        window.open(url, "_blank", "noreferrer");
+      };
+
+    const hello=(_id,pdf_url)=>{
+        console.log(_id)
+        console.log(pdf_url)
+        
+        openInNewTab(`http://localhost:8080/uploads/${pdf_url}`)
+    }
+  
 
   return (
+  <div className='hdbeb'>
     <div className='alfaiz'>
       <form >
         <h1>Tech Pack</h1>
@@ -89,9 +124,51 @@ const TechPack = () => {
             />
           </div>
 
-          <button className="sumbit" onClick={() => { handleClick(style, category, collection, pdf) }}>Submit</button>
+          <button className="sumbit" onClick={handleClick}>Submit</button>
         </div>
       </form>
+    </div>
+
+    <div className='marginn'>
+                <div> <h1 className='hello'>TechPack Data</h1></div>
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><input type="text" className='form-control' onChange={Filter} placeholder='Search By Category' /></div>
+                <div className="table-container">
+                    <table className="table-rwd">
+                        <tbody>
+                            <tr>
+                                <th />
+                                <th>category</th>
+                                <th>Collections</th>
+                                <th>Style</th>
+                                <th>PDF url</th>
+
+                            </tr>
+
+                            {
+                                records.map((data, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td style={{ color: "black" }}>{index + 1}</td>
+                                            <td>{data.category}</td>
+                                            <td>{data.collectionss}</td>
+                                            <td>{data.style}</td>
+                                            <td ><div onClick={() => hello(data._id, data.pdf)}>{data.pdf}</div></td>
+
+                                        </tr>
+                                    )
+                                })
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
     </div>
   )
 }
