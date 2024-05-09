@@ -64,7 +64,7 @@ const TechPackData = () => {
                                             <td style={{ color: "black" }}>{index + 1}</td>
                                             <td>{data.category}</td>
                                             <td>{data.collectionss}</td>
-                                            <td>{data.style}</td>
+                                            <td>{data.Style}</td>
                                             <td ><div onClick={() => hello(data._id, data.pdf)}>{data.pdf}</div></td>
 
                                         </tr>

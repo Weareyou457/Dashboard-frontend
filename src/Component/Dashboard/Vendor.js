@@ -41,7 +41,7 @@ const Vendor = () => {
   }
 
   return (
-    <div className='alfaiz'>
+    <div className='alfaiz' >
       <div >
         <h1>Vendor Details</h1>
         <div className="ui divider"></div>
